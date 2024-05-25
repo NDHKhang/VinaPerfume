@@ -1,0 +1,113 @@
+    <!DOCTYPE html>
+<html class="no-js" lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <title>Đơn Hàng - Vina Perfume</title>
+    <meta name="robots" content="noindex, follow" />
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+
+    <!-- Place favicon.png} in the root directory -->
+    <link rel="shortcut icon" th:href="@{/resources/front/img/favicon.png}" type="image/x-icon" />
+    <!-- Font Icons css -->
+    <link rel="stylesheet" th:href="@{/resources/front/css/font-icons.css}" />
+    <!-- plugins css -->
+    <link rel="stylesheet" th:href="@{/resources/front/css/plugins.css}" />
+    <!-- Main Stylesheet -->
+    <link rel="stylesheet" th:href="@{/resources/front/css/style.css}" />
+    <!-- Responsive css -->
+    <link rel="stylesheet" th:href="@{/resources/front/css/responsive.css}" />
+
+    <style>
+        div.dec.qtybutton, div.inc.qtybutton {
+            display:none;
+        }
+    </style>
+</head>
+
+<body>
+<!-- Body main wrapper start -->
+<div class="body-wrapper">
+    <div th:replace="~{fragments/front/header :: header}"></div>
+    <div class="ltn__utilize-overlay"></div>
+
+    <!-- BREADCRUMB AREA START -->
+    <div class="ltn__breadcrumb-area ltn__breadcrumb-area-4 ltn__breadcrumb-color-white---">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="ltn__breadcrumb-inner text-center">
+                        <h1 class="ltn__page-title">Đơn Hàng</h1>
+                        <div class="ltn__breadcrumb-list">
+                            <ul>
+                                <li><a href="/">Trang Chủ</a></li>
+                                <li>Đơn Hàng</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- BREADCRUMB AREA END -->
+
+    <!-- SHOPING CART AREA START -->
+    <div class="liton__shoping-cart-area mb-100">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="shoping-cart-inner">
+                        <div class="shoping-cart-table table-responsive">
+                            <table class="table">
+                                <thead>
+                                <th class="cart-product-info">Mã</th>
+                                <th class="cart-product-price">Người Nhận</th>
+                                <th class="cart-product-price">Địa Chỉ</th>
+                                <th class="cart-product-price">Ngày Mua</th>
+                                <th class="cart-product-subtotal">Tổng</th>
+                                <th class="cart-product-subtotal">Tình Trạng</th>
+                                <th class="cart-product-subtotal">Tuỳ Chọn</th>
+                                </thead>
+                                <tbody>
+                                <tr th:each="item : ${orders}">
+                                    <td class="cart-product-remove">
+                                        <a th:href="@{'/auth/order/' +${item.id}}"><span th:text="${item.customerId}"></span></a>
+                                    </td>
+                                    <td class="cart-product-info">
+                                        <span th:text="${item.customerName}"></span>
+                                    </td>
+                                    <td class="cart-product-info">
+                                        <span th:text="${item.address}"></span>
+                                    </td>
+                                    <td class="cart-product-price" th:text="${item.dateDisplay}"></td>
+                                    <td class="cart-product-subtotal" th:text="${item.priceDisplay}"></td>
+                                    <td class="cart-product-price" th:switch="${item.progress}">
+                                        <span th:case="PENDING">Chờ Duyệt</span>
+                                        <span th:case="APPROVED">Đã Duyệt</span>
+                                        <span th:case="COMPLETED">Hoàn Thành</span>
+                                        <span th:case="CANCELED">Đã Huỷ</span>
+                                    </td>
+                                    <td class="cart-product-remove">
+                                        <a class="btn btn-primary btn-sm" th:href="@{'/auth/order/' +${item.id}}">Chi Tiết</a>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- SHOPING CART AREA END -->
+    <div th:replace="~{fragments/front/footer :: footer}"></div>
+</div>
+<!-- Body main wrapper end -->
+
+<!-- All JS Plugins -->
+<script th:src="@{/resources/front/js/plugins.js}"></script>
+<!-- Main JS -->
+<script th:src="@{/resources/front/js/main.js}"></script>
+</body>
+</html>

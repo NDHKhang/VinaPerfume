@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="x-ua-compatible" content="ie=edge" />
+        <title>Trang Chủ - Vina Perfume</title>
+        <meta name="robots" content="noindex, follow" />
+        <meta name="description" content="" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+
+        <!-- Place favicon.png} in the root directory -->
+        <link rel="shortcut icon" th:href="@{/resources/front/img/favicon.png}" type="image/x-icon" />
+        <!-- Font Icons css -->
+        <link rel="stylesheet" th:href="@{/resources/front/css/font-icons.css}" />
+        <!-- plugins css -->
+        <link rel="stylesheet" th:href="@{/resources/front/css/plugins.css}" />
+        <!-- Main Stylesheet -->
+        <link rel="stylesheet" th:href="@{/resources/front/css/style.css}" />
+        <!-- Responsive css -->
+        <link rel="stylesheet" th:href="@{/resources/front/css/responsive.css}" />
+    </head>
+
+    <body>
+        <!-- Body main wrapper start -->
+        <div class="body-wrapper">
+            <div th:replace="~{fragments/front/header :: header}"></div>
+
+            <div class="ltn__utilize-overlay"></div>
+
+            <!-- SLIDER AREA START (slider-6) -->
+            <div class="ltn__slider-area ltn__slider-3 ltn__slider-6 section-bg-1">
+                <div class="ltn__slide-one-active slick-slide-arrow-1 slick-slide-dots-1 arrow-white---">
+                    <!-- ltn__slide-item  -->
+                    <div
+                        class="ltn__slide-item ltn__slide-item-8 text-color-white---- bg-image bg-overlay-theme-black-80---"
+                        data-bs-bg="/resources/front/img/slider_4.webp"
+                    >
+                    </div>
+                    <!-- ltn__slide-item  -->
+                    <div
+                        class="ltn__slide-item ltn__slide-item-8 text-color-white---- bg-image bg-overlay-theme-black-80---"
+                        data-bs-bg="/resources/front/img/slider_2.webp"
+                    ></div>
+                    <div
+                        class="ltn__slide-item ltn__slide-item-8 text-color-white---- bg-image bg-overlay-theme-black-80---"
+                        data-bs-bg="/resources/front/img/slider_3.webp"
+                    ></div>
+                    <div
+                        class="ltn__slide-item ltn__slide-item-8 text-color-white---- bg-image bg-overlay-theme-black-80---"
+                        data-bs-bg="/resources/front/img/slider_4.webp"
+                    ></div>
+                    <!--  -->
+                </div>
+            </div>
+            <!-- SLIDER AREA END -->
+
+            <!-- FEATURE AREA START ( Feature - 3) -->
+            <div class="ltn__feature-area mt-100 mt--65">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div
+                                class="ltn__feature-item-box-wrap ltn__feature-item-box-wrap-2 ltn__border section-bg-6 position-relative"
+                            >
+                                <div class="ltn__feature-item ltn__feature-item-8">
+                                    <div class="ltn__feature-icon">
+                                        <img th:src="@{/resources/front/img/icons/svg/8-trolley.svg}" alt="#" />
+                                    </div>
+                                    <div class="ltn__feature-info">
+                                        <h4>Miễn Phí Vận Chuyển</h4>
+                                        <p>Đơn hàng trên 500.000 VNĐ</p>
+                                    </div>
+                                </div>
+                                <div class="ltn__feature-item ltn__feature-item-8">
+                                    <div class="ltn__feature-icon">
+                                        <img th:src="@{/resources/front/img/icons/svg/9-money.svg}" alt="#" />
+                                    </div>
+                                    <div class="ltn__feature-info">
+                                        <h4>Trả Hàng Trong 15 Ngày</h4>
+                                        <p>Đảm Bảo Hoàn Tiền</p>
+                                    </div>
+                                </div>
+                                <div class="ltn__feature-item ltn__feature-item-8">
+                                    <div class="ltn__feature-icon">
+                                        <img th:src="@{/resources/front/img/icons/svg/11-gift-card.svg}" alt="#" />
+                                    </div>
+                                    <div class="ltn__feature-info">
+                                        <h4>Ưu Đãi & Quà Tặng</h4>
+                                        <p>Cho tất cả các đơn đặt hàng</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- FEATURE AREA END -->
+
+            <!-- PRODUCT AREA START -->
+            <div class="ltn__product-area ltn__product-gutter pt-65 pb-40">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="section-title-area text-center">
+                                <h1 class="section-title section-title-border">Sản Phẩm Mới</h1>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row justify-content-center">
+                        <!-- ltn__product-item -->
+                        <div class="col-lg-3 col-md-4 col-sm-6 col-6" th:each="item : ${productList}">
+                            <div class="ltn__product-item text-center">
+                                <div class="product-img">
+                                    <a th:href="'/product/' + ${item.id}"><img th:src="@{${item.image}}" alt="#" /></a>
+                                    <div class="product-badge">
+                                        <ul>
+                                            <li class="badge-1">NEW</li>
+                                        </ul>
+                                    </div>
+                                    <div class="product-hover-action product-hover-action-2">
+                                        <ul>
+                                            <li class="add-to-cart">
+                                                <a
+                                                    th:href="@{'/cart/add-to-cart?productId=' + ${item.id}}"
+                                                    title="Add to Cart"
+                                                >
+                                                    <span class="cart-text d-none d-xl-block">Thêm vào giỏ hàng</span>
+                                                    <span class="d-block d-xl-none"><i class="icon-handbag"></i></span>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="product-info">
+                                    <h2 class="product-title">
+                                        <a th:href="'/product/' + ${item.id}" th:text="${item.name}"></a>
+                                    </h2>
+                                    <div class="product-price">
+                                        <span th:text="${item.priceDisplay + ' VNĐ'}"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- PRODUCT SLIDER AREA END -->
+
+            <div th:replace="~{fragments/front/footer :: footer}"></div>
+        </div>
+        <!-- Body main wrapper end -->
+
+        <!-- All JS Plugins -->
+        <script th:src="@{/resources/front/js/plugins.js}"></script>
+        <!-- Main JS -->
+        <script th:src="@{/resources/front/js/main.js}"></script>
+    </body>
+</html>

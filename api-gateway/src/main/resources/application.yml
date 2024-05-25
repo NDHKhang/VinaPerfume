@@ -1,0 +1,42 @@
+server:
+  port: 8000
+
+eureka:
+  client:
+    registerWithEureka: true
+    fetchRegistry: true
+    serviceUrl:
+      defaultZone: http://admin:123456@discovery-service:8761/eureka
+  instance:
+    preferIpAddress: true
+
+spring:
+  application:
+    name: api-gateway
+  cloud:
+    gateway:
+      routes:
+        - id: product-service
+          uri: lb://product-service
+          predicates:
+            - Path=/api/products/**
+          filters:
+            - RewritePath=/api/products/(?<remaining>.*), /$\{remaining}
+        - id: order-service
+          uri: lb://order-service
+          predicates:
+            - Path=/api/orders/**
+          filters:
+            - RewritePath=/api/orders/(?<remaining>.*), /$\{remaining}
+        - id: image-service
+          uri: lb://image-service
+          predicates:
+            - Path=/api/images/**
+          filters:
+            - RewritePath=/api/images/(?<remaining>.*), /$\{remaining}
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+      base-path: /actuator

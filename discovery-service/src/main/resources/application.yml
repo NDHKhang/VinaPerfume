@@ -1,0 +1,25 @@
+server:
+  port: 8761
+
+spring:
+  application:
+    name: discovery-service
+  security:
+    basic:
+      enabled: true
+    user:
+      name: admin
+      password: 123456
+      roles: ACTUATOR
+
+eureka:
+  config:
+    username: admin
+    password: 123456
+  instance:
+    hostname: localhost
+  client:
+    register-with-eureka: false
+    fetch-registry: false
+    service-url:
+      defaultZone: http://admin:123456@${eureka.instance.hostname}:${server.port}/eureka

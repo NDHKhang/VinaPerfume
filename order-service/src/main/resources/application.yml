@@ -1,0 +1,48 @@
+server:
+  port: 8101
+
+eureka:
+  client:
+    registerWithEureka: true
+    fetchRegistry: true
+    serviceUrl:
+      defaultZone: http://admin:123456@discovery-service:8761/eureka
+  instance:
+    preferIpAddress: true
+
+spring:
+  application:
+    name: order-service
+  datasource:
+    url: jdbc:mysql://mysql-service:3306/vinaperfumeapp?allowPublicKeyRetrieval=true&useSSL=false
+    username: root
+    password: 12345678
+  jpa:
+    database-platform: org.hibernate.dialect.MySQL8Dialect
+    hibernate:
+      ddl-auto: update
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: http://localhost:9999/realms/vinaperfume
+          jwk-set-uri: ${spring.security.oauth2.resourceserver.jwt.issuer-uri}/protocol/openid-connect/certs
+
+# JWT Configuration
+jwt:
+  auth:
+    converter:
+      resource-id: vinaperfume
+      principal-attribute: principal_username
+
+# Logging Configuration
+logging:
+  level:
+    org.springframework.security: DEBUG
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+      base-path: /actuator
